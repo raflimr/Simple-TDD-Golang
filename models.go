@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"regexp"
 	"strconv"
 )
@@ -23,14 +22,8 @@ type Employee struct {
 // Name
 func (e *Employee) SetName(name string) string {
 	e.Name = name
-	var regex, err = regexp.Compile(`(?i)[a-z]+`)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	//Debugging
-	e.Name = regex.FindString(e.Name)
-	// fmt.Printf("Value of e.Name after Regex %+v", e.Address)
-	return e.Name
+	var regex, _ = regexp.Compile(`(?i)[a-z]+`)
+	return regex.FindString(e.Name)
 }
 
 func (e *Employee) GetName() string {
@@ -40,14 +33,8 @@ func (e *Employee) GetName() string {
 //Address
 func (e *Employee) SetAddress(address string) string {
 	e.Address = address
-	var regex, err = regexp.Compile(`^[a-zA-Z0-9_.,-/ ]*$`)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-
-	e.Address = regex.FindString(e.Address)
-	//fmt.Printf("Value of e.Address after Regex %+v", e.Address)
-	return e.Address
+	var regex, _ = regexp.Compile(`^[a-zA-Z0-9_.,-/ ]*$`)
+	return regex.FindString(e.Address)
 }
 
 func (e *Employee) GetAddress() string {
@@ -58,16 +45,9 @@ func (e *Employee) GetAddress() string {
 func (e *Employee) SetAge(age string) int {
 	ageInt, _ := strconv.Atoi(age)
 	e.Age = ageInt
-	var regex, err = regexp.Compile(`\d`)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-
-	// Debugging
+	var regex, _ = regexp.Compile(`\d`)
 	AgeStr := strconv.Itoa(e.Age)
 	AgeStr = regex.FindString(AgeStr)
-	//fmt.Printf("Value of e.Age/AgeStr after Regex %+v", AgeStr)
-
 	return e.Age
 }
 
